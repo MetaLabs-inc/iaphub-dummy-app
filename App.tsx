@@ -10,6 +10,7 @@
 
 import React, {useEffect} from 'react';
 import {
+  Button,
   SafeAreaView,
   ScrollView,
   StatusBar,
@@ -27,6 +28,8 @@ import {
   ReloadInstructions,
 } from 'react-native/Libraries/NewAppScreen';
 import Iaphub from 'react-native-iaphub';
+import {useGetProducts} from './hooks/useGetProducts';
+import {buyProduct} from './helpers';
 
 const Section: React.FC<{
   title: string;
@@ -79,6 +82,8 @@ const App = () => {
     initialize();
   }, []);
 
+  const {products} = useGetProducts();
+
   return (
     <SafeAreaView style={backgroundStyle}>
       <StatusBar barStyle={isDarkMode ? 'light-content' : 'dark-content'} />
@@ -90,20 +95,19 @@ const App = () => {
           style={{
             backgroundColor: isDarkMode ? Colors.black : Colors.white,
           }}>
-          <Section title="Step One">
-            Edit <Text style={styles.highlight}>App.js</Text> to change this
-            screen and then come back to see your edits.
-          </Section>
-          <Section title="See Your Changes">
-            <ReloadInstructions />
-          </Section>
-          <Section title="Debug">
-            <DebugInstructions />
-          </Section>
-          <Section title="Learn More">
-            Read the docs to discover what to do next:
-          </Section>
-          <LearnMoreLinks />
+          {products.map(product => (
+            <View
+              style={{
+                flexDirection: 'row',
+                justifyContent: 'space-between',
+                alignItems: 'center',
+                paddingHorizontal: 30,
+                flex: 1,
+              }}>
+              <Text>{`${product?.title} - ${product?.priceCurrency} ${product?.priceAmount}`}</Text>
+              <Button title={'Buy'} onPress={() => buyProduct(product?.sku)} />
+            </View>
+          ))}
         </View>
       </ScrollView>
     </SafeAreaView>
