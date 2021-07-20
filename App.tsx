@@ -108,6 +108,17 @@ const App = () => {
               <Button title={'Buy'} onPress={() => buyProduct(product?.sku)} />
             </View>
           ))}
+          <View
+            style={{
+              flexDirection: 'row',
+              justifyContent: 'space-between',
+              alignItems: 'center',
+              paddingHorizontal: 30,
+              flex: 1,
+            }}>
+            <Text>{'Test'}</Text>
+            <Button title={'Buy'} onPress={() => buyProduct('test1')} />
+          </View>
         </View>
       </ScrollView>
     </SafeAreaView>
