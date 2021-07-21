@@ -5,7 +5,6 @@ import {
   FlatListProps,
   ListRenderItemInfo,
   SafeAreaView,
-  ScrollView,
   Text,
   View,
 } from 'react-native';
@@ -59,32 +58,30 @@ const App = () => {
 
   return (
     <SafeAreaView style={styles.backgroundStyle}>
-      <ScrollView contentInsetAdjustmentBehavior="automatic">
-        <View style={styles.sectionContainer}>
-          <FlatList
-            ListHeaderComponent={
-              <ListHeaderComponent title={'Products For Sale'} />
-            }
-            ListEmptyComponent={
-              <ListEmptyComponent message={'No Products For Sale'} />
-            }
-            keyExtractor={keyExtractor}
-            data={productsForSale}
-            renderItem={productsForSaleRenderItem}
-          />
-          <FlatList
-            ListHeaderComponent={
-              <ListHeaderComponent title={'Active Products'} />
-            }
-            ListEmptyComponent={
-              <ListEmptyComponent message={'No Active Products'} />
-            }
-            keyExtractor={keyExtractor}
-            data={activeProducts}
-            renderItem={activeProductsRenderItem}
-          />
-        </View>
-      </ScrollView>
+      <View style={styles.sectionContainer}>
+        <FlatList
+          ListHeaderComponent={
+            <ListHeaderComponent title={'Products For Sale'} />
+          }
+          ListEmptyComponent={
+            <ListEmptyComponent message={'No Products For Sale'} />
+          }
+          keyExtractor={keyExtractor}
+          data={productsForSale}
+          renderItem={productsForSaleRenderItem}
+        />
+        <FlatList
+          ListHeaderComponent={
+            <ListHeaderComponent title={'Active Products'} />
+          }
+          ListEmptyComponent={
+            <ListEmptyComponent message={'No Active Products'} />
+          }
+          keyExtractor={keyExtractor}
+          data={activeProducts}
+          renderItem={activeProductsRenderItem}
+        />
+      </View>
     </SafeAreaView>
   );
 };
