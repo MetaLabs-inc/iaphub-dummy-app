@@ -1,13 +1,19 @@
 import {useEffect, useState} from 'react';
-import Iaphub from 'react-native-iaphub';
+import Iaphub, {IapHubProductInformation} from 'react-native-iaphub';
 
 export const useGetProducts = () => {
-  const [products, setProducts] = useState<any>([]);
+  const [productsForSale, setProductsForSale] = useState<
+    IapHubProductInformation[]
+  >([]);
+  const [activeProducts, setActiveProducts] = useState<
+    IapHubProductInformation[]
+  >([]);
 
   useEffect(() => {
     async function getProducts() {
       try {
         const productsForSale = await Iaphub.getProductsForSale();
+        const activeProducts = await Iaphub.getActiveProducts();
 
         //The products should have the following structure
         // {
@@ -24,7 +30,8 @@ export const useGetProducts = () => {
         //   subscriptionPeriodType: "normal",
         //   subscriptionDuration: "P1M"
         // },
-        setProducts(productsForSale);
+        setProductsForSale(productsForSale);
+        setActiveProducts(activeProducts);
       } catch (error) {
         console.log('error', error);
       }
@@ -33,6 +40,7 @@ export const useGetProducts = () => {
   }, []);
 
   return {
-    products,
+    productsForSale,
+    activeProducts,
   };
 };
