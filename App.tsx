@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {
   Button,
   FlatList,
@@ -17,10 +17,18 @@ import {styles} from './styles';
 import {IapHubProductInformation} from 'react-native-iaphub';
 
 const App = () => {
-  useIaphubInitialize();
-  const {productsForSale, activeProducts} = useGetProducts();
-  const buyOnPress = (sku: string) => () => buyProduct(sku);
+  const {iaphubInitialized} = useIaphubInitialize();
 
+  const [productsForSale, setProductsForSale] = useState<
+    IapHubProductInformation[]
+  >([]);
+
+  const [activeProducts, setActiveProducts] = useState<
+    IapHubProductInformation[]
+  >([]);
+  useGetProducts(iaphubInitialized, setProductsForSale, setActiveProducts);
+
+  const buyOnPress = (sku: string) => () => buyProduct(sku);
   const productsForSaleRenderItem: FlatListProps<IapHubProductInformation>['renderItem'] =
     ({item}: ListRenderItemInfo<IapHubProductInformation>) => (
       <View style={styles.rowContainer}>
