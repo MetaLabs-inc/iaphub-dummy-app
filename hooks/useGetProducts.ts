@@ -14,7 +14,6 @@ export const useGetProducts = () => {
       try {
         const productsForSale = await Iaphub.getProductsForSale();
         const activeProducts = await Iaphub.getActiveProducts();
-
         //The products should have the following structure
         // {
         //   id: "5e5198930c48ed07aa275fd9",
@@ -33,7 +32,7 @@ export const useGetProducts = () => {
         setProductsForSale(productsForSale);
         setActiveProducts(activeProducts);
       } catch (error) {
-        console.log('error', error);
+        console.warn('error', error);
       }
     }
     getProducts();

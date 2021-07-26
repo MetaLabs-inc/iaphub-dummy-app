@@ -20,6 +20,7 @@ const App = () => {
   useIaphubInitialize();
   const {productsForSale, activeProducts} = useGetProducts();
   const buyOnPress = (sku: string) => () => buyProduct(sku);
+
   const productsForSaleRenderItem: FlatListProps<IapHubProductInformation>['renderItem'] =
     ({item}: ListRenderItemInfo<IapHubProductInformation>) => (
       <View style={styles.rowContainer}>
@@ -72,7 +73,7 @@ const App = () => {
         />
         <FlatList
           ListHeaderComponent={
-            <ListHeaderComponent title={'Active Products'} />
+            <ListHeaderComponent title={'My Active Products'} />
           }
           ListEmptyComponent={
             <ListEmptyComponent message={'No Active Products'} />

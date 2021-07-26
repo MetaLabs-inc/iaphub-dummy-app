@@ -12,7 +12,7 @@ export const useIaphubInitialize = () => {
         // App environment (production by default, other environments must be created on the IAPHUB dashboard)
         environment: 'production',
       });
-      await Iaphub.setUserId('idDummy3');
+      await Iaphub.setUserId('idDummy5');
     }
     initialize();
   }, []);
