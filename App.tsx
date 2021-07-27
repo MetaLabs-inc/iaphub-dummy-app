@@ -15,6 +15,7 @@ import {useIaphubInitialize} from './hooks/useIaphubInitialize';
 import {buyProduct} from './helpers';
 import {styles} from './styles';
 import {IapHubProductInformation} from 'react-native-iaphub';
+import {useEffect} from 'react';
 
 const App = () => {
   const {iaphubInitialized} = useIaphubInitialize();
@@ -22,13 +23,19 @@ const App = () => {
   const [productsForSale, setProductsForSale] = useState<
     IapHubProductInformation[]
   >([]);
-
   const [activeProducts, setActiveProducts] = useState<
     IapHubProductInformation[]
   >([]);
-  useGetProducts(iaphubInitialized, setProductsForSale, setActiveProducts);
+  const {getProducts} = useGetProducts(setProductsForSale, setActiveProducts);
+
+  useEffect(() => {
+    if (iaphubInitialized) {
+      getProducts();
+    }
+  }, [iaphubInitialized]);
 
   const buyOnPress = (sku: string) => () => buyProduct(sku);
+
   const productsForSaleRenderItem: FlatListProps<IapHubProductInformation>['renderItem'] =
     ({item}: ListRenderItemInfo<IapHubProductInformation>) => (
       <View style={styles.rowContainer}>

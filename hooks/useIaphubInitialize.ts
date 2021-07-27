@@ -14,7 +14,7 @@ export const useIaphubInitialize = () => {
           // App environment (production by default, other environments must be created on the IAPHUB dashboard)
           environment: 'production',
         }),
-        await Iaphub.setUserId('idDummy5'),
+        await Iaphub.setUserId('idDummy6'),
       ]).then(() => setIapHubInitialized(true));
     }
     initialize();

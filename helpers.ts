@@ -1,12 +1,7 @@
 import {Alert} from 'react-native';
-import Iaphub, {IapHubProductInformationWithWebhook} from 'react-native-iaphub';
+import Iaphub from 'react-native-iaphub';
 
-export const buyProduct = async (
-  sku: string,
-  storeTransactionHandler?: (
-    transaction: IapHubProductInformationWithWebhook,
-  ) => void,
-) => {
+export const buyProduct = async (sku: string) => {
   try {
     var transaction = await Iaphub.buy(sku, {
       // Optional callback triggered before the receipt is processed
@@ -32,7 +27,6 @@ export const buyProduct = async (
         'Purchase successful',
         'Your purchase has been processed successfully!',
       );
-      // storeTransactionHandler(transaction);
     }
   } catch (error) {
     // Purchase popup cancelled by the user (ios only)
